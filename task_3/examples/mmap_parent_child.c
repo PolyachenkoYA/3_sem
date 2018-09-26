@@ -20,8 +20,9 @@ int main() {
   if (mychild > 0) {
     shared[0] = 10;
     shared[1] = 20;
+    printf("child done\n");
   } else {
-    sleep(1); // We will talk about synchronization later
+    //sleep(1); // We will talk about synchronization later
     printf("%d\n", shared[1] + shared[0]);
   }
 

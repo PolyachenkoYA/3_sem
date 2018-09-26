@@ -5,8 +5,6 @@
 
 #define MSG_SIZE     1024
 
-
-
 typedef struct msgbuf {
     long    mtype;
     char    mtext[MSG_SIZE];
@@ -15,19 +13,19 @@ typedef struct msgbuf {
 
 int main()
 {
-    int msqid;
+    int msgid;
     key_t key;
     message_buf  rbuf;
 
     key = 10;
 
-    if ((msqid = msgget(key, 0666)) < 0) {
+    if ((msgid = msgget(key, 0666)) < 0) {
         perror("msgget");
         exit(1);
     }
 
     
-    if (msgrcv(msqid, &rbuf, MSG_SIZE, 1, 0) < 0) {
+    if (msgrcv(msgid, &rbuf, MSG_SIZE, 1, 0) < 0) {
         perror("msgrcv");
         exit(1);
     }
