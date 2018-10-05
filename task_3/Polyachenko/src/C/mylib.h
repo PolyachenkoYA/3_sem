@@ -1,10 +1,14 @@
 #pragma once
 
+#pragma GCC diagnostic ignored "-Wunused-result"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/mman.h> /* mmap() is defined in this header */
+#include <sys/ipc.h>
+#include <sys/msg.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <errno.h>
@@ -13,11 +17,19 @@
 #include <semaphore.h>
 
 #include <time.h>
+#include "BUF_SIZ.h"
 
 typedef struct {
   int p2c[2];
   int c2p[2];
 } dpipe_t;
+
+typedef struct msgbuf {
+    long mtype;
+    //char *mtext;
+    //char mtext[100];
+    char mtext[BUF_SIZ];
+} message_buf;
 
 long my_min(long a, long b);
 

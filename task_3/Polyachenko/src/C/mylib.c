@@ -59,7 +59,8 @@ char *gen_data(long sz)
     char *raw_data = (char*)malloc(sizeof(char) * sz);
 
     for(i = 0; i < sz; ++i)
-        raw_data[i] = (rand() % 10) + '0'; // random char ['0';'9']
+        //raw_data[i] = (rand() % 10) + '0'; // random char ['0';'9']
+        raw_data[i] = 1;
 
     return raw_data;
 }

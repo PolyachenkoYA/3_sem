@@ -21,10 +21,10 @@ def main():
         print('usage: ./cmp.py    file1      file2')
         sys.exit(1) 
     
-    #if(filecmp.cmp(args[0], args[1])):
-    #    print('OK')
-    #else:
-    #    print('FAIL')
+    if(filecmp.cmp(args[0], args[1])):
+        print('OK')
+    else:
+        print('FAIL')
         
 # This is the standard boilerplate that calls the main() function.
 if __name__ == '__main__':

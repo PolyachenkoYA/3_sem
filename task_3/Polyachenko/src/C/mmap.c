@@ -5,7 +5,6 @@ long main(long argc, char **argv)
     if(argc == 4){
         long file_size = atol(argv[1]);
         long buf_size = atol(argv[2]);
-        // file_size % buf_size == 0
         char *filename = argv[3];
         char parent_filename[100];
         char child_filename[100];

@@ -12,7 +12,7 @@ function draw_res(names, h, file_sizes, buf_sizes)
     colorbar;
     title('time; log scale');
     view(0, 90);
-    filename = [names.res_fld '/' names.filename '_time.fig' names.data_ext];
+    filename = [names.res_fld '/' names.filename '_time.fig'];
     savefig(filename);
     
 % ------------------------------ eff ---------------------------------    
