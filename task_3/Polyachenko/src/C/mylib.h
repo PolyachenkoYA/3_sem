@@ -15,19 +15,18 @@
 #include <string.h>
 #include <pthread.h>
 #include <semaphore.h>
+#include <sys/shm.h>
+#include <string.h>
+
 
 #include <time.h>
 #include "BUF_SIZ.h"
 
-typedef struct {
-  int p2c[2];
-  int c2p[2];
-} dpipe_t;
+#define SEMAPHORE_NAME_1 "/my_named_posix_semaphore"
+#define SEMAPHORE_NAME_2 "/my_named_posix_semaphor"
 
 typedef struct msgbuf {
     long mtype;
-    //char *mtext;
-    //char mtext[100];
     char mtext[BUF_SIZ];
 } message_buf;
 
@@ -40,15 +39,4 @@ long gen_file(char *filename, long file_size);
 
 char *gen_data(long sz);
 // generate SZ random bytes
-
-long load_file(char *filename, char** new_data, long *file_size);
-// allocate memory & load file into it
-
-long cmp_files(char **files, long file_size);
-// 1 if files are identical, 0 otherwise
-
-long dpipe_init_pipes(dpipe_t *dp);
-long dpipe_cleanup(dpipe_t *dp, long is_parent);
-ssize_t dpipe_send(dpipe_t *dp, const void *msg, size_t sz, long is_parent);
-ssize_t dpipe_rcv(dpipe_t *dp, void *msg, size_t sz, long is_parent);
 

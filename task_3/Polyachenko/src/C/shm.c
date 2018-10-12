@@ -28,12 +28,13 @@ long main(long argc, char **argv)
             return EXIT_FAILURE;
         }
 
-        void *m1 = mmap(0, buf_size, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);
-        char *data = m1;
+        char *data; /* pointer to the shm */
+        int shmid = shmget(ftok("shm.c", 1234), buf_size, IPC_CREAT | 0666);
         struct timespec start, stop;
 
         pid_t this_is_parent = fork();
         if(this_is_parent){
+            data = shmat(shmid, (void *) 0, 0);
             char *parent_data = gen_data(file_size);
             if(dbg){
                 save_file(parent_filename, parent_data, file_size);
@@ -59,7 +60,7 @@ long main(long argc, char **argv)
             double write_t = (stop.tv_sec - start.tv_sec) + ( stop.tv_nsec - start.tv_nsec) / 1.0e9;
 
             free(parent_data);
-            munmap(m1, buf_size);
+            shmctl(shmid, IPC_RMID, 0);
             sem_wait(sem1);
             sem_close(sem1);
 
@@ -77,6 +78,7 @@ long main(long argc, char **argv)
                 printf("%lf\n", write_t);
             }
         } else {
+            data = shmat(shmid, (void *) 0, 0);
             char *child_data = (char*)malloc(sizeof(char) * file_size);
 
             long i, el_left = file_size, shift = 0;
@@ -109,7 +111,7 @@ long main(long argc, char **argv)
             sem_post(sem1);
             sem_close(sem2);
             free(child_data);
-            munmap(m1, buf_size);
+            //shmctl(shmid, IPC_RMID, 0);
         }
     } else {
         printf("usage:\n%s file_size buf_size [filename]\n", argv[0]);

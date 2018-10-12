@@ -1,4 +1,4 @@
-function draw_res(names, h, file_sizes, buf_sizes)
+function draw_res(names, h, file_sizes, buf_sizes, tit)
 % ------------------------------ time ----------------------------------
     figure;
     ax = axes;
@@ -10,7 +10,7 @@ function draw_res(names, h, file_sizes, buf_sizes)
     %set(ax,'ZScale','log');
 
     colorbar;
-    title('time; log scale');
+    title(['time; ' tit]);
     view(0, 90);
     filename = [names.res_fld '/' names.filename '_time.fig'];
     savefig(filename);
@@ -34,7 +34,7 @@ function draw_res(names, h, file_sizes, buf_sizes)
     %set(ax,'ZScale','log');
 
     colorbar;
-    title('efficiency; log scale');
+    title(['efficiency; ' tit]);
     view(0, 90);    
     filename = [names.res_fld '/' names.filename '_eff.fig'];
     savefig(filename);    

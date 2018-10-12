@@ -7,7 +7,8 @@ function h = build_res(names, file_sizes, buf_sizes)
     for fi = 1:l_file
         for bi = 1:l_buf
             i = bi + (fi-1) * l_buf;
-            h(fi, bi) = times(1, i) + times(2, i);
+            %h(fi, bi) = times(1, i) + times(2, i);
+            h(fi, bi) = max(times(1, i), times(2, i));
         end
     end
 end
