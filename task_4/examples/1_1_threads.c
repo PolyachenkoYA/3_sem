@@ -30,6 +30,7 @@ int main(void)
 {
     int i = 0;
     int err;
+    pthread_t *tid = (pthread_t*)malloc(sizeof(pthread_t) * 2);
 
     while(i < 2) {
         err = pthread_create(&(tid[i]), NULL, &thread_stuff, NULL);

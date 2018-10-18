@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-#define NUM_LOOPS 1000000
+#define NUM_LOOPS 100000000
 
 long long sum = 0;
 
@@ -23,6 +23,6 @@ int main() {
 	pthread_create(&id2, NULL, cnt_routine, &offset2);
 	pthread_join(id1, NULL);
 	pthread_join(id2, NULL);
-	printf("Result of counting: %lld\n",sum );
+	printf("Result of counting: %f\n", (double)sum / NUM_LOOPS );
 	return 0;
 }
