@@ -16,10 +16,10 @@
 int main(int argc, char* argv[])
 {
     if(argc > 2){
-        printf("usage:\n%s [period=10sec]\n", argv[0]);
+        printf("usage:\n%s [period=15sec]\n", argv[0]);
         return 0;
     }
-    int T = (argc == 2 ? atoi(argv[1]) : 10);
+    int T = (argc == 2 ? atoi(argv[1]) : 15);
 
     pid_t parpid;
     if((parpid = fork()) < 0){
